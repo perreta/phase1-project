@@ -23,7 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     divFrame.append(h1, divImage)
     divContainer.append(divFrame)
 
-    //divContainer.addEventListener('click',() => {})
+    divContainer.addEventListener('click',() => {
+      document.getElementById('pokemon-container').innerHTML=''
+      renderSinglePokemon(pokemon)
+
+      document.querySelector('.pokemon-card').addEventListener('click', ()=>{
+        document.getElementById('pokemon-container').innerHTML=''
+        fetchAllPokemon()
+      })
+    })
   
     document.querySelector('#pokemon-container').append(divContainer)
   }
