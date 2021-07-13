@@ -17,21 +17,25 @@ function capitalizeFirstLetter(string) {
     let img = document.createElement('img')
     let removeButton = document.createElement('button')
     let caughtButton = document.createElement('input')
-    let likeButton = document.createElement('button')
+    let favoriteButton = document.createElement('input')
 
     divContainer.className = 'pokemon-card'
     divFrame.className = 'pokemon-frame'
     divImage.className = 'pokemon-image'
     h1.className = 'center-text'
     h2Type.className = 'type-class'
+    removeButton.className = 'remove-button'
+    caughtButton.className = 'caught-button'
+    favoriteButton.className = 'favorite-button'
+
     h1.textContent = capitalizeFirstLetter(pokemon.name)
-    
     img.src = pokemon.sprites.front_default
     removeButton.textContent = 'X'
     caughtButton.type = 'image'
-    caughtButton.className = 'caught-button'
+    favoriteButton.type = 'image'
+    
     caughtButton.src = 'images/emptyPokeball.png'
-
+    favoriteButton.src = 'images/emptyStar.png'
 
     //ADDING TYPES
     if(pokemon.types[1]){
@@ -47,9 +51,15 @@ function capitalizeFirstLetter(string) {
       e.stopPropagation()
     })
 
+    //FAVORITE BUTTON
+    favoriteButton.addEventListener('click', (e) => { 
+        favoriteButton.src = 'images/fillStar.png'
+        e.stopPropagation()
+    })
+
     //POPULATING CARD
     divImage.append(img)
-    divFrame.append(removeButton, h1, divImage, h2Type, caughtButton)
+    divFrame.append(removeButton, h1, divImage, h2Type, favoriteButton, caughtButton)
     divContainer.append(divFrame)
     document.querySelector('#pokemon-container').append(divContainer)
 
@@ -82,8 +92,9 @@ function capitalizeFirstLetter(string) {
 
       document.querySelector('.pokemon-image').remove()
       document.querySelector('h2').remove()
+      document.querySelector('.caught-button').remove()
       divFullImage.append(img, imgBack)
-      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight)
+      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, caughtButton)
       
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{

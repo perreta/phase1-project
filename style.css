@@ -4,8 +4,8 @@ body {
     font-weight: 300;
     /* background-color: red; */
   }
-  
-button {
+ 
+.remove-button {
   float: right;
   cursor: pointer;
 }  
@@ -114,4 +114,9 @@ button {
   .caught-button {
     width: 25px;
     float: right;
+  }
+  
+  .favorite-button {
+    width: 25px;
+    float: left;
   }
