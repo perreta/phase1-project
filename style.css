@@ -110,3 +110,8 @@ button {
   h2 {
     font-size: 20px;
   }
+
+  .caught-button {
+    width: 25px;
+    float: right;
+  }

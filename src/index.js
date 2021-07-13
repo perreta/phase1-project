@@ -16,6 +16,8 @@ function capitalizeFirstLetter(string) {
     let h2Type = document.createElement('h2')
     let img = document.createElement('img')
     let removeButton = document.createElement('button')
+    let caughtButton = document.createElement('input')
+    let likeButton = document.createElement('button')
 
     divContainer.className = 'pokemon-card'
     divFrame.className = 'pokemon-frame'
@@ -26,6 +28,10 @@ function capitalizeFirstLetter(string) {
     
     img.src = pokemon.sprites.front_default
     removeButton.textContent = 'X'
+    caughtButton.type = 'image'
+    caughtButton.className = 'caught-button'
+    caughtButton.src = 'images/emptyPokeball.png'
+
 
     //ADDING TYPES
     if(pokemon.types[1]){
@@ -35,9 +41,15 @@ function capitalizeFirstLetter(string) {
       h2Type.textContent = 'Type: ' + capitalizeFirstLetter(pokemon.types[0].type.name)
     }
 
+    //CAUGHT BUTTON
+    caughtButton.addEventListener('click', (e) => { 
+      caughtButton.src = 'images/fillPokeball.png'
+      e.stopPropagation()
+    })
+
     //POPULATING CARD
     divImage.append(img)
-    divFrame.append(removeButton, h1, divImage, h2Type)
+    divFrame.append(removeButton, h1, divImage, h2Type, caughtButton)
     divContainer.append(divFrame)
     document.querySelector('#pokemon-container').append(divContainer)
 
