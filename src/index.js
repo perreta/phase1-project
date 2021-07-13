@@ -13,6 +13,7 @@ function capitalizeFirstLetter(string) {
     let divFrame = document.createElement('div')
     let divImage = document.createElement('div')
     let h1 = document.createElement('h1')
+    let h2Type = document.createElement('h2')
     let img = document.createElement('img')
     let removeButton = document.createElement('button')
 
@@ -20,21 +21,35 @@ function capitalizeFirstLetter(string) {
     divFrame.className = 'pokemon-frame'
     divImage.className = 'pokemon-image'
     h1.className = 'center-text'
+    h2Type.className = 'type-class'
     h1.textContent = capitalizeFirstLetter(pokemon.name)
+    
     img.src = pokemon.sprites.front_default
     removeButton.textContent = 'X'
 
-    removeButton.addEventListener('click', (e) => {
-      e.target.parentElement.innerHTML = ''
-    })
-  
+    //ADDING TYPES
+    if(pokemon.types[1]){
+      h2Type.textContent = 'Type: ' + capitalizeFirstLetter(pokemon.types[0].type.name) + ' & ' + capitalizeFirstLetter(pokemon.types[1].type.name)
+    }
+    else{
+      h2Type.textContent = 'Type: ' + capitalizeFirstLetter(pokemon.types[0].type.name)
+    }
+
+    //POPULATING CARD
     divImage.append(img)
-    divFrame.append(h1, divImage)
-    divContainer.append(divFrame, removeButton)
+    divFrame.append(removeButton, h1, divImage, h2Type)
+    divContainer.append(divFrame)
     document.querySelector('#pokemon-container').append(divContainer)
 
+    //REMOVE BUTTON
+    removeButton.addEventListener('click', (e) => {
+      e.target.parentElement.remove()
+      //e.target.parentElement.innerHTML = ''
+      e.stopPropagation()
+    })
+
     //CLICKING ON A POKEMON FOR MORE DETAIL
-    divFrame.addEventListener('click',() => {
+    divFrame.addEventListener('click',(e) => {
       document.getElementById('pokemon-container').innerHTML='';
       renderSinglePokemon(pokemon);
       console.log(pokemon)
@@ -42,17 +57,22 @@ function capitalizeFirstLetter(string) {
       
       let divHeight = document.createElement('div')
       let divWeight = document.createElement('div')
+      let divFullImage = document.createElement('div')
       let imgBack = document.createElement('img')
       let h2Height = document.createElement('h2')
       let h2Weight = document.createElement('h2')
 
+      divFullImage.className = 'full-pokemon-image'
+      
       imgBack.src = pokemon.sprites.back_default
       h2Height.textContent = 'Height: ' + pokemon.height
-      h2Weight.textContent = 'Weight: ' + pokemon.weight
+      h2Weight.textContent = 'Weight: ' + pokemon.weight    
 
-      document.querySelector('.pokemon-image').append(imgBack)
-      document.querySelector('.pokemon-frame').append(h2Height, h2Weight)
-
+      document.querySelector('.pokemon-image').remove()
+      document.querySelector('h2').remove()
+      divFullImage.append(img, imgBack)
+      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight)
+      
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
         document.getElementById('pokemon-container').innerHTML=''
