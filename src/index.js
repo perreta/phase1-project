@@ -69,12 +69,30 @@ function capitalizeFirstLetter(string) {
       //e.target.parentElement.innerHTML = ''
       e.stopPropagation()
     })
-
+    //TRYING NOTES OUTSIDE
+    let divNotes = document.createElement('div')
+      let formNotes = document.createElement('form')
+      let inputNotes = document.createElement('input')
+      let submitNotes = document.createElement('submit')
+      let addNotes = document.createElement('ul')
+      inputNotes.id = "inputNotes"
+      inputNotes.placeholder = "Notes..."
+      inputNotes.style.width = "100px"
+      // inputNotes.addEventListener('onKeyPress', (e) => {
+      //   // inputNotes.text = inputNotes.value
+      //   e.stopPropogation()
+      // })
+      submitNotes.textContent = "Add Notes"
+      submitNotes.addEventListener('submit', (e) => {
+        e.preventDefault()
+        addNotes.textContent = inputNotes.value
+      })
+      divNotes.append(formNotes, addNotes, inputNotes, submitNotes) 
     //CLICKING ON A POKEMON FOR MORE DETAIL
     divFrame.addEventListener('click',(e) => {
       document.getElementById('pokemon-container').innerHTML='';
       renderSinglePokemon(pokemon);
-      console.log(pokemon)
+      // console.log(pokemon)
       document.querySelector('.center-text').textContent = '#' + pokemon.id + ' ' + (capitalizeFirstLetter(pokemon.name))
       
       let divHeight = document.createElement('div')
@@ -96,26 +114,28 @@ function capitalizeFirstLetter(string) {
       document.querySelector('.favorite-button').remove()
       divFullImage.append(img, imgBack)
       
-      //ADD NOTES SECTION
-      let formNotes = document.createElement('form')
-      let inputNotes = document.createElement('input')
-      let submitNotes = document.createElement('submit')
-      let addNotes = document.createElement('ul')
-      inputNotes.id = "inputNotes"
-      inputNotes.placeholder = "Notes..."
-      inputNotes.style.width = "100px"
-      // inputNotes.addEventListener('onKeyPress', (e) => {
-      //   // inputNotes.text = inputNotes.value
-      //   e.stopPropogation()
-      // })
-      submitNotes.textContent = "Add Notes"
-      submitNotes.addEventListener('submit', (e) => {
-        e.preventDefault()
-        addNotes.textContent = inputNotes.text
+      //ADD NOTES SECTION TRYING INSIDE RENDER SINGLE POKEMON INFO
+      // let divNotes = document.createElement('div')
+      // let formNotes = document.createElement('form')
+      // let inputNotes = document.createElement('input')
+      // let submitNotes = document.createElement('submit')
+      // let addNotes = document.createElement('ul')
+      // inputNotes.id = "inputNotes"
+      // inputNotes.placeholder = "Notes..."
+      // inputNotes.style.width = "100px"
+      // // inputNotes.addEventListener('onKeyPress', (e) => {
+      // //   // inputNotes.text = inputNotes.value
+      // //   e.stopPropogation()
+      // // })
+      // submitNotes.textContent = "Add Notes"
+      // submitNotes.addEventListener('submit', (e) => {
+      //   e.preventDefault()
+      //   addNotes.textContent = inputNotes.text
   
-      })
-      formNotes.append(addNotes, inputNotes, submitNotes) 
-      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton, formNotes)
+      // })
+      // divNotes.append(formNotes, addNotes, inputNotes, submitNotes) 
+
+      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton, divNotes) //divNotes 
     
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
@@ -127,11 +147,11 @@ function capitalizeFirstLetter(string) {
         fetchAllPokemon()
       })
 
-      //DROPDOWN EVENT LISTENER IN PROGRESS
-      document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
-        if (h2Type.classList.contains(e.target.value)){}
-        else{h2Type.parentElement.parentElement.remove()}
-      })
+      //DROPDOWN EVENT LISTENER IN PROGRESS - MORE UP TO DATE IN MAIN BRANCH
+      // document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
+      //   if (h2Type.classList.contains(e.target.value)){}
+      //   else{h2Type.parentElement.parentElement.remove()}
+      // })
     })
   
     
