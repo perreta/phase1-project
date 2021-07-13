@@ -93,11 +93,16 @@ function capitalizeFirstLetter(string) {
       document.querySelector('.pokemon-image').remove()
       document.querySelector('h2').remove()
       document.querySelector('.caught-button').remove()
+      document.querySelector('.favorite-button').remove()
       divFullImage.append(img, imgBack)
-      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, caughtButton)
-      
+      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton)
+    
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
+        document.getElementById('pokemon-container').innerHTML=''
+        fetchAllPokemon()
+      })
+      document.querySelector('#pokemon-logo').addEventListener('click', ()=>{
         document.getElementById('pokemon-container').innerHTML=''
         fetchAllPokemon()
       })
