@@ -84,6 +84,7 @@ function capitalizeFirstLetter(string) {
       let h2Height = document.createElement('h2')
       let h2Weight = document.createElement('h2')
 
+<<<<<<< HEAD
       //ADDING NOTES FORM TO SINGLE POKEMON PAGE
       let formNotes = document.createElement('form')
       let inputNotes = document.createElement('input')
@@ -106,6 +107,8 @@ function capitalizeFirstLetter(string) {
 
 
 
+=======
+>>>>>>> main
       divFullImage.className = 'full-pokemon-image'
       
       imgBack.src = pokemon.sprites.back_default
@@ -117,7 +120,11 @@ function capitalizeFirstLetter(string) {
       document.querySelector('.caught-button').remove()
       document.querySelector('.favorite-button').remove()
       divFullImage.append(img, imgBack)
+<<<<<<< HEAD
       document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton, formNotes)
+=======
+      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton)
+>>>>>>> main
     
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
@@ -128,12 +135,15 @@ function capitalizeFirstLetter(string) {
         document.getElementById('pokemon-container').innerHTML=''
         fetchAllPokemon()
       })
+<<<<<<< HEAD
       //FILTERING THROUGH DROPDOWN
       document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
         document.getElementById('pokemon-container').innerHTML=''
         e.target.value
         if ((pokemon.types[0].type.name) == option.value || (pokemon.types[1].type.name) == option.value) {
         let filteredTypes = e.target.value
+=======
+>>>>>>> main
     })
   
     

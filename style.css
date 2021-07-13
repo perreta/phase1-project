@@ -2,8 +2,14 @@ body {
     font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
       sans-serif;
     font-weight: 300;
+    background-color: red;
   }
-  
+ 
+.remove-button {
+  float: right;
+  cursor: pointer;
+}  
+
   #container {
     width: 1000px;
     margin: auto;
@@ -25,6 +31,7 @@ body {
   #pokemon-logo {
     width: 300px;
     margin-left: 330px;
+    cursor: pointer;
   }
   
   input:focus {
@@ -33,15 +40,21 @@ body {
   
   .pokemon-card {
     float: left;
-    width: 250px;
-    margin: auto;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer
   }
   
   .pokemon-frame {
-    width: 230px;
+    width: 250px;
     margin: 10px;
-    background: #fecd2f;
-    color: #2d72fc;
+    background: rgb(100, 100, 100);
+    border: 12px solid silver;
+    /* background: #fecd2f;
+    color: #2d72fc; */
+    color: rgb(0, 255, 0);
+    /* -webkit-text-stroke: 1px black; */
   }
   
   .pokemon-image {
@@ -90,8 +103,33 @@ body {
   #hidden{
     display: none;
   }
+<<<<<<< HEAD
   
   #likeButton {
     display:inline-block;
     background: url(/images/pokeball.jpg);
+=======
+
+  .full-pokemon-image {
+    display:inline-block;
+    margin:5px 20px;
+    padding:5px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-left: 5px;
+  }
+
+  .caught-button {
+    width: 25px;
+    margin-left: 190px; 
+    margin-right: 5px;
+
+  }
+  
+  .favorite-button {
+    width: 25px;
+    margin-left: 5px;
+>>>>>>> main
   }
