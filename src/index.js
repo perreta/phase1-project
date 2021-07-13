@@ -1,9 +1,14 @@
 //Will run callback after dom has loaded
 document.addEventListener('DOMContentLoaded', () => {
-    fetchAllPokemon()
-  })
- 
-  //Render ------------------------------------------------------------
+  fetchAllPokemon()
+})
+
+  // CAPITALIZE FIRST LETTER
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+};
+
+  //RENDERING ALL POKEMON ------------------------------------------------------------
   function renderSinglePokemon(pokemon){
     let divContainer = document.createElement('div')
     let divFrame = document.createElement('div')
@@ -15,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     divFrame.className = 'pokemon-frame'
     divImage.className = 'pokemon-image'
     h1.className = 'center-text'
-    h1.textContent = pokemon.name
+    h1.textContent = capitalizeFirstLetter(pokemon.name)
      
     img.src = pokemon.sprites.front_default
   
@@ -23,10 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
     divFrame.append(h1, divImage)
     divContainer.append(divFrame)
 
+    //CLICKING ON A POKEMON FOR MORE DETAIL
     divContainer.addEventListener('click',() => {
-      document.getElementById('pokemon-container').innerHTML=''
-      renderSinglePokemon(pokemon)
+      document.getElementById('pokemon-container').innerHTML='';
+      renderSinglePokemon(pokemon);
+      console.log(pokemon)
+      document.querySelector('.center-text').textContent = (capitalizeFirstLetter(pokemon.name) + ' ' + '#' + pokemon.id)
+      
+      let divHeight = document.createElement('div')
+      let divWeight = document.createElement('div')
+      let imgBack = document.createElement('img')
+      let h2Height = document.createElement('h2')
+      let h2Weight = document.createElement('h2')
 
+      imgBack.src = pokemon.sprites.back_default
+      h2Height.textContent = 'Height: ' + pokemon.height
+      h2Weight.textContent = 'Weight: ' + pokemon.weight
+
+      document.querySelector('.pokemon-image').append(imgBack)
+      document.querySelector('.pokemon-frame').append(h2Height, h2Weight)
+
+      //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
         document.getElementById('pokemon-container').innerHTML=''
         fetchAllPokemon()
@@ -36,8 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#pokemon-container').append(divContainer)
   }
   
-//GET Requests ------------------------------------------------------
-  //GET All
+// GET All------------------------------------------------------
   function fetchAllPokemon(){
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     .then(res => res.json())
@@ -46,15 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
       fetch(data.results[i].url)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         renderSinglePokemon(data)
         }
       )}
     })}
         
-//Should Fetch all pokemon from our json-server
-//Should handle a promise
-//Should render the return data to the page 
 
   //GET One
   //Should take an id as a parameter 
