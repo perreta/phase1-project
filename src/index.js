@@ -84,31 +84,6 @@ function capitalizeFirstLetter(string) {
       let h2Height = document.createElement('h2')
       let h2Weight = document.createElement('h2')
 
-<<<<<<< HEAD
-      //ADDING NOTES FORM TO SINGLE POKEMON PAGE
-      let formNotes = document.createElement('form')
-      let inputNotes = document.createElement('input')
-      let submitNotes = document.createElement('submit')
-      let addNotes = document.createElement('ul')
-      inputNotes.id = "inputNotes"
-      inputNotes.placeholder = "Notes..."
-      inputNotes.style.width = "100px"
-      inputNotes.addEventListener('onKeyPress', (e) => {
-        // inputNotes.text = inputNotes.value
-        e.stopPropogation()
-      })
-      submitNotes.textContent = "Add Notes"
-      submitNotes.addEventListener('submit', (e) => {
-        e.preventDefault()
-        addNotes.textContent = inputNotes.text
-
-      })
-      formNotes.append(addNotes, inputNotes, submitNotes) //readd formnotes to the append too if redoing this
-
-
-
-=======
->>>>>>> main
       divFullImage.className = 'full-pokemon-image'
       
       imgBack.src = pokemon.sprites.back_default
@@ -120,11 +95,27 @@ function capitalizeFirstLetter(string) {
       document.querySelector('.caught-button').remove()
       document.querySelector('.favorite-button').remove()
       divFullImage.append(img, imgBack)
-<<<<<<< HEAD
+      
+      //ADD NOTES SECTION
+      let formNotes = document.createElement('form')
+      let inputNotes = document.createElement('input')
+      let submitNotes = document.createElement('submit')
+      let addNotes = document.createElement('ul')
+      inputNotes.id = "inputNotes"
+      inputNotes.placeholder = "Notes..."
+      inputNotes.style.width = "100px"
+      // inputNotes.addEventListener('onKeyPress', (e) => {
+      //   // inputNotes.text = inputNotes.value
+      //   e.stopPropogation()
+      // })
+      submitNotes.textContent = "Add Notes"
+      submitNotes.addEventListener('submit', (e) => {
+        e.preventDefault()
+        addNotes.textContent = inputNotes.text
+  
+      })
+      formNotes.append(addNotes, inputNotes, submitNotes) 
       document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton, formNotes)
-=======
-      document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton)
->>>>>>> main
     
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
@@ -135,33 +126,27 @@ function capitalizeFirstLetter(string) {
         document.getElementById('pokemon-container').innerHTML=''
         fetchAllPokemon()
       })
-<<<<<<< HEAD
-      //FILTERING THROUGH DROPDOWN
+
+      //DROPDOWN EVENT LISTENER IN PROGRESS
       document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
-        document.getElementById('pokemon-container').innerHTML=''
-        e.target.value
-        if ((pokemon.types[0].type.name) == option.value || (pokemon.types[1].type.name) == option.value) {
-        let filteredTypes = e.target.value
-=======
->>>>>>> main
+        if (h2Type.classList.contains(e.target.value)){}
+        else{h2Type.parentElement.parentElement.remove()}
+      })
     })
   
     
   }
   
 // GET All------------------------------------------------------
-  function fetchAllPokemon(){
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then(res => res.json())
+function fetchAllPokemon(){
+  for (let i = 1; i <= 151; ++i){
+    fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+    .then(response => response.json())
     .then(data => {
-      for (let i = 0; i<data.results.length; i++){
-      fetch(data.results[i].url)
-      .then(response => response.json())
-      .then(data => {
-        renderSinglePokemon(data)
-        }
-      )}
-    })}
+    renderSinglePokemon(data)
+  })
+}
+}
         
 
   //GET One

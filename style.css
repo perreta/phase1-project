@@ -1,135 +1,128 @@
 body {
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-      sans-serif;
-    font-weight: 300;
-    background-color: red;
-  }
- 
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
+    sans-serif;
+  font-weight: 300;
+  background-color: red;
+}
+
 .remove-button {
-  float: right;
-  cursor: pointer;
+float: right;
+cursor: pointer;
 }  
 
-  #container {
-    width: 1000px;
-    margin: auto;
-    margin-top: 50px;
-  }
-  
-  #pokemon-search-form {
-    width: 500px;
-    margin: auto;
-    margin-top: 50px;
-  }
-  
-  #pokemon-search-input {
-    font-size: 2rem;
-    border: 3px solid #fecd2f;
-    color: #2d72fc;
-  }
-  
-  #pokemon-logo {
-    width: 300px;
-    margin-left: 330px;
-    cursor: pointer;
-  }
-  
-  input:focus {
-    outline: none;
-  }
-  
-  .pokemon-card {
-    float: left;
-    width: 300px;
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer
-  }
-  
-  .pokemon-frame {
-    width: 250px;
-    margin: 10px;
-    background: rgb(100, 100, 100);
-    border: 12px solid silver;
-    /* background: #fecd2f;
-    color: #2d72fc; */
-    color: rgb(0, 255, 0);
-    /* -webkit-text-stroke: 1px black; */
-  }
-  
-  .pokemon-image {
-    width: 96px;
-    margin: auto;
-  }
-  
-  .center-text {
-    text-align: center;
-  }
-  
-  .flip-image {
-    color: #2d72fc;
-  }
-  
-  #pokemon-post-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  #pokemon-post-form p {
-    font-size: 1.2rem;
-    color: #2d72fc;
-  }
-  
-  #pokemon-post-form input[type='text'] {
-    font-size: 2rem;
-    border: 3px solid #fecd2f;
-    color: #2d72fc;
-  }
-  
-  .pokemon-button {
-    font-size: 2rem;
-    border: 3px solid #2d72fc;
-    background-color: #fecd2f;
-    color: #2d72fc;
-  }
-  
-  .pokemon-button:hover {
-    background-color: #2d72fc;
-    color: #fecd2f;
-  }
-  
-  #hidden{
-    display: none;
-  }
-<<<<<<< HEAD
-  
-  #likeButton {
-    display:inline-block;
-    background: url(/images/pokeball.jpg);
-=======
+#container {
+  width: 1000px;
+  margin: auto;
+  margin-top: 50px;
+}
 
-  .full-pokemon-image {
-    display:inline-block;
-    margin:5px 20px;
-    padding:5px;
-  }
+#pokemon-search-form {
+  width: 500px;
+  margin: auto;
+  margin-top: 50px;
+}
 
-  h2 {
-    font-size: 20px;
-    margin-left: 5px;
-  }
+#pokemon-search-input {
+  font-size: 2rem;
+  border: 3px solid #fecd2f;
+  color: #2d72fc;
+}
 
-  .caught-button {
-    width: 25px;
-    margin-left: 190px; 
-    margin-right: 5px;
+#pokemon-logo {
+  width: 300px;
+  margin-left: 330px;
+  cursor: pointer;
+}
 
-  }
-  
-  .favorite-button {
-    width: 25px;
-    margin-left: 5px;
->>>>>>> main
-  }
+input:focus {
+  outline: none;
+}
+
+.pokemon-card {
+  float: left;
+  width: 300px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer
+}
+
+.pokemon-frame {
+  width: 250px;
+  margin: 10px;
+  background: rgb(100, 100, 100);
+  border: 12px solid silver;
+  /* background: #fecd2f;
+  color: #2d72fc; */
+  color: rgb(0, 255, 0);
+  /* -webkit-text-stroke: 1px black; */
+}
+
+.pokemon-image {
+  width: 96px;
+  margin: auto;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.flip-image {
+  color: #2d72fc;
+}
+
+#pokemon-post-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#pokemon-post-form p {
+  font-size: 1.2rem;
+  color: #2d72fc;
+}
+
+#pokemon-post-form input[type='text'] {
+  font-size: 2rem;
+  border: 3px solid #fecd2f;
+  color: #2d72fc;
+}
+
+.pokemon-button {
+  font-size: 2rem;
+  border: 3px solid #2d72fc;
+  background-color: #fecd2f;
+  color: #2d72fc;
+}
+
+.pokemon-button:hover {
+  background-color: #2d72fc;
+  color: #fecd2f;
+}
+
+#hidden{
+  display: none;
+}
+
+.full-pokemon-image {
+  display:inline-block;
+  margin:5px 20px;
+  padding:5px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.caught-button {
+  width: 25px;
+  margin-left: 190px; 
+  margin-right: 5px;
+
+}
+
+.favorite-button {
+  width: 25px;
+  margin-left: 5px;
+}
