@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetchAllPokemon()
+  document.querySelector('#pokedex-logo').addEventListener('click', (e) => {
+    fetchAllPokemon()
+    document.querySelector('#pokedex-logo').children.classList = 'pokemon-card'
+  })
 })
 
   // CAPITALIZE FIRST LETTER
@@ -19,11 +23,12 @@ function capitalizeFirstLetter(string) {
     let caughtButton = document.createElement('input')
     let favoriteButton = document.createElement('input')
 
-    divContainer.className = 'pokemon-card'
+    divContainer.classList = 'pokemon-card'
+    divContainer.id = `${pokemon.id}`
     divFrame.className = 'pokemon-frame'
     divImage.className = 'pokemon-image'
     h1.className = 'center-text'
-    h2Type.className = 'type-class'
+    h2Type.classList = 'type-class'
     removeButton.className = 'remove-button'
     caughtButton.className = 'caught-button'
     favoriteButton.className = 'favorite-button'
@@ -36,14 +41,27 @@ function capitalizeFirstLetter(string) {
     
     caughtButton.src = 'images/emptyPokeball.png'
     favoriteButton.src = 'images/emptyStar.png'
+    favoriteButton.id = 'favorite-empty'
 
     //ADDING TYPES
     if(pokemon.types[1]){
       h2Type.textContent = 'Type: ' + capitalizeFirstLetter(pokemon.types[0].type.name) + ' & ' + capitalizeFirstLetter(pokemon.types[1].type.name)
+      h2Type.classList = pokemon.types[0].type.name + ' ' + pokemon.types[1].type.name + ' ' + 'all'
     }
     else{
       h2Type.textContent = 'Type: ' + capitalizeFirstLetter(pokemon.types[0].type.name)
+      h2Type.classList = pokemon.types[0].type.name + ' ' + 'all'
     }
+
+    //FILTER TYPES
+    document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
+      if (h2Type.classList.contains(`${e.target.value}`)){h2Type.parentElement.parentElement.classList = 'pokemon-card'
+    }else{
+        h2Type.parentElement.parentElement.classList = 'hidden'}
+    })
+
+    //CLICKABLE POKEDEX IMAGE
+    
 
     //CAUGHT BUTTON
     caughtButton.addEventListener('click', (e) => { 
@@ -53,8 +71,15 @@ function capitalizeFirstLetter(string) {
 
     //FAVORITE BUTTON
     favoriteButton.addEventListener('click', (e) => { 
-        favoriteButton.src = 'images/fillStar.png'
-        e.stopPropagation()
+      console.log(e.target)
+        if (e.target.id === 'favorite-empty'){
+          e.target.src = 'images/fillStar.png'
+          e.target.id = 'favorite-fill'
+        } else {
+          e.target.src = 'images/emptyStar.png'
+          e.target.id = 'favorite-empty' 
+        }
+      e.stopPropagation()
     })
 
     //POPULATING CARD
@@ -65,8 +90,8 @@ function capitalizeFirstLetter(string) {
 
     //REMOVE BUTTON
     removeButton.addEventListener('click', (e) => {
-      e.target.parentElement.remove()
-      //e.target.parentElement.innerHTML = ''
+      console.log(e.target)
+      e.target.parentElement.parentElement.remove()
       e.stopPropagation()
     })
 
@@ -102,32 +127,31 @@ function capitalizeFirstLetter(string) {
         document.getElementById('pokemon-container').innerHTML=''
         fetchAllPokemon()
       })
-      document.querySelector('#pokemon-logo').addEventListener('click', ()=>{
-        document.getElementById('pokemon-container').innerHTML=''
-        fetchAllPokemon()
-      })
     })
-  
-    
   }
-  
-// GET All------------------------------------------------------
-  function fetchAllPokemon(){
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-    .then(res => res.json())
-    .then(data => {
-      for (let i = 0; i<data.results.length; i++){
-      fetch(data.results[i].url)
-      .then(response => response.json())
-      .then(data => {
-        renderSinglePokemon(data)
-        }
-      )}
-    })}
-        
 
-  //GET One
-  //Should take an id as a parameter 
-  //Should make Get request Fetching a single animal from our json-server
-  //Should handle a promise
-  //Should render that pokemon to the page and remove the other pokemon
+// GET All------------------------------------------------------
+function fetchAllPokemon(){
+  for (let i = 1; i <= 151; ++i){
+    fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+    .then(response => response.json())
+    .then(data => {
+    renderSinglePokemon(data)
+    })
+  }
+}
+
+
+
+
+
+// function filterPokemon(pokemon){
+//   document.getElementById('type-dropdown').addEventListener('change', (e) =>{
+//     console.log(e.target.value)
+//     if (e.target.value == h2Type.textContent){}
+//     else{
+//       h2Type.parentElement.parentElement.parentElement.remove()
+//     }
+    
+    // document.getElementById('pokemon-container').innerHTML=''
+    // let filteredPokemon = pokemon.type
