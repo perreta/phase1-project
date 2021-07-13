@@ -90,3 +90,8 @@ body {
   #hidden{
     display: none;
   }
+  
+  #likeButton {
+    display:inline-block;
+    background: url(/images/pokeball.jpg);
+  }

@@ -44,12 +44,27 @@ function capitalizeFirstLetter(string) {
       let h2Height = document.createElement('h2')
       let h2Weight = document.createElement('h2')
 
+      let like = document.createElement('button')
+      let likesCounter = 0
+      like.textContent = `${likesCounter} likes`
+      // let likeButton = document.createElement('button')
+      // likeButton.id = likeButtonId
+      // likeButton.firstChild.src = 
+      let numberLikes = parseInt(like.textContent.split(" ")[0])
+      like.addEventListener('click', () => {
+        like.textContent = `${numberLikes} likes`
+      })
+      
       imgBack.src = pokemon.sprites.back_default
       h2Height.textContent = 'Height: ' + pokemon.height
       h2Weight.textContent = 'Weight: ' + pokemon.weight
 
+
+
       document.querySelector('.pokemon-image').append(imgBack)
-      document.querySelector('.pokemon-frame').append(h2Height, h2Weight)
+      document.querySelector('.pokemon-frame').append(h2Height, h2Weight, like)
+
+      // let like = parseInt
 
       //BRINGING BACK THE THE FULL RENDERING
       document.querySelector('.pokemon-card').addEventListener('click', ()=>{
