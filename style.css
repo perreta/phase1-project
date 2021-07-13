@@ -4,6 +4,10 @@ body {
     font-weight: 300;
   }
   
+button {
+  float: right;
+}  
+
   #container {
     width: 1000px;
     margin: auto;

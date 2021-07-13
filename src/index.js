@@ -1,4 +1,3 @@
-//Will run callback after dom has loaded
 document.addEventListener('DOMContentLoaded', () => {
   fetchAllPokemon()
 })
@@ -8,32 +7,38 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 };
 
-  //RENDERING ALL POKEMON ------------------------------------------------------------
+  // RENDERING ALL POKEMON -----------------------------------------------------------
   function renderSinglePokemon(pokemon){
     let divContainer = document.createElement('div')
     let divFrame = document.createElement('div')
     let divImage = document.createElement('div')
     let h1 = document.createElement('h1')
     let img = document.createElement('img')
+    let removeButton = document.createElement('button')
 
     divContainer.className = 'pokemon-card'
     divFrame.className = 'pokemon-frame'
     divImage.className = 'pokemon-image'
     h1.className = 'center-text'
     h1.textContent = capitalizeFirstLetter(pokemon.name)
-     
     img.src = pokemon.sprites.front_default
+    removeButton.textContent = 'X'
+
+    removeButton.addEventListener('click', (e) => {
+      e.target.parentElement.innerHTML = ''
+    })
   
     divImage.append(img)
     divFrame.append(h1, divImage)
-    divContainer.append(divFrame)
+    divContainer.append(divFrame, removeButton)
+    document.querySelector('#pokemon-container').append(divContainer)
 
     //CLICKING ON A POKEMON FOR MORE DETAIL
-    divContainer.addEventListener('click',() => {
+    divFrame.addEventListener('click',() => {
       document.getElementById('pokemon-container').innerHTML='';
       renderSinglePokemon(pokemon);
       console.log(pokemon)
-      document.querySelector('.center-text').textContent = (capitalizeFirstLetter(pokemon.name) + ' ' + '#' + pokemon.id)
+      document.querySelector('.center-text').textContent = '#' + pokemon.id + ' ' + (capitalizeFirstLetter(pokemon.name))
       
       let divHeight = document.createElement('div')
       let divWeight = document.createElement('div')
@@ -55,7 +60,7 @@ function capitalizeFirstLetter(string) {
       })
     })
   
-    document.querySelector('#pokemon-container').append(divContainer)
+    
   }
   
 // GET All------------------------------------------------------
