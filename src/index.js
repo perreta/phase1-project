@@ -22,6 +22,8 @@ function renderSinglePokemon(pokemon){
   let removeButton = document.createElement('button')
   let caughtButton = document.createElement('input')
   let favoriteButton = document.createElement('input')
+  let pokemonContainer = document.getElementById('pokemon-container')
+  let empty = []
 
   divContainer.classList = 'pokemon-card'
   divContainer.id = `${pokemon.id}`
@@ -85,6 +87,13 @@ function renderSinglePokemon(pokemon){
   divContainer.append(divFrame)
   document.querySelector('#pokemon-container').append(divContainer)
 
+  //ORDER POKEMON BY ID
+  empty.map.call(pokemonContainer.children, Object ).sort(function (a,b) {
+    return +a.id.match( /\d+/ ) - +b.id.match( /\d+/ );
+  }).forEach(function (elem) {
+    pokemonContainer.appendChild(elem);
+  });
+
   //REMOVE BUTTON
   removeButton.addEventListener('click', (e) => {
     console.log(e.target)
@@ -118,7 +127,9 @@ function renderSinglePokemon(pokemon){
     document.querySelector('.caught-button').remove()
     document.querySelector('.favorite-button').remove()
     divFullImage.append(img, imgBack)
-    document.querySelector('.pokemon-frame').append(divFullImage, h2Type, h2Height, h2Weight, favoriteButton, caughtButton)
+    divHeight.append(h2Height)
+    divWeight.append(h2Weight)
+    document.querySelector('.pokemon-frame').append(divFullImage, h2Type, divHeight, divWeight, favoriteButton, caughtButton)
     
     //BRINGING BACK THE THE FULL RENDERING
     document.querySelector('.pokemon-card').addEventListener('click', ()=>{
