@@ -92,3 +92,7 @@ body {
     font-style: oblique;
     color: chartreuse;
   }
+
+  .hidden-card{
+    display: none;
+  }

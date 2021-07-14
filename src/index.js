@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetchAllPokemon()
-  document.querySelector('#pokedex-logo').addEventListener('click', (e) => {
-    document.getElementById('pokemon-container').innerHTML='';
-    fetchAllPokemon()    
-  })
 })
 
   // CAPITALIZE FIRST LETTER
@@ -24,22 +20,38 @@ function renderSinglePokemon(pokemon){
   let favoriteButton = document.createElement('input')
   let pokemonContainer = document.getElementById('pokemon-container')
   let empty = []
+  let divHeight = document.createElement('div')
+  let divWeight = document.createElement('div')
+  let divFullImage = document.createElement('div')
+  let imgBack = document.createElement('img')
+  let h2Height = document.createElement('h2')
+  let h2Weight = document.createElement('h2')
 
   divContainer.classList = 'pokemon-card'
   divContainer.id = `${pokemon.id}`
-  divFrame.className = 'pokemon-frame'
-  divImage.className = 'pokemon-image'
-  h1.className = 'center-text'
+  divFrame.classList = 'pokemon-frame'
+  divImage.classList = 'pokemon-image'
+  divImage.id = `${pokemon.id}image`
+  h1.classList = 'center-text'
   h2Type.classList = 'type-class'
-  removeButton.className = 'remove-button'
-  caughtButton.className = 'caught-button'
-  favoriteButton.className = 'favorite-button'
+  removeButton.classList = 'remove-button'
+  caughtButton.classList = 'caught-button'
+  favoriteButton.classList = 'favorite-button'
+  divFullImage.id = `${pokemon.id}full-pokemon-image`
+  divFullImage.classList = 'hidden'
+  divHeight.classList = 'hidden'
+  divWeight.classList = 'hidden'
+  divHeight.id = `${pokemon.id}height`
+  divWeight.id = `${pokemon.id}weight`
 
-  h1.textContent = capitalizeFirstLetter(pokemon.name)
+  h1.textContent = '#' + pokemon.id + ' ' + capitalizeFirstLetter(pokemon.name)
   img.src = pokemon.sprites.front_default
   removeButton.textContent = 'X'
   caughtButton.type = 'image'
   favoriteButton.type = 'image'
+  imgBack.src = pokemon.sprites.back_default
+  h2Height.textContent = 'Height: ' + pokemon.height
+  h2Weight.textContent = 'Weight: ' + pokemon.weight 
   
   caughtButton.src = 'images/emptyPokeballWhite.png'
   favoriteButton.src = 'images/emptyStarWhite.png'
@@ -57,9 +69,16 @@ function renderSinglePokemon(pokemon){
 
   //FILTER TYPES
   document.querySelector('#type-dropdown').addEventListener('change', (e) =>{
-    if (h2Type.classList.contains(`${e.target.value}`)){h2Type.parentElement.parentElement.classList = 'pokemon-card'
+    if (h2Type.classList.contains(`${e.target.value}`)){
+      h2Type.parentElement.parentElement.classList = 'pokemon-card'
+      document.getElementById(`${pokemon.id}height`).classList = 'hidden'
+      document.getElementById(`${pokemon.id}weight`).classList = 'hidden'
+      document.getElementById(`${pokemon.id}`).className = 'pokemon-card'
+      document.getElementById(`${pokemon.id}image`).classList = 'pokemon-image'
+      divImage.append(img)
+      document.getElementById(`${pokemon.id}full-pokemon-image`).classList = 'hidden'
   }else{
-      h2Type.parentElement.parentElement.classList = 'hidden'}
+      h2Type.parentElement.parentElement.classList = 'hidden-card'}
   })
 
   //CAUGHT BUTTON
@@ -83,13 +102,16 @@ function renderSinglePokemon(pokemon){
 
   //POPULATING CARD
   divImage.append(img)
-  divFrame.append(removeButton, h1, divImage, h2Type, favoriteButton, caughtButton)
+  divHeight.append(h2Height)
+  divWeight.append(h2Weight)
+  divFrame.append(removeButton, h1, divImage, divFullImage, h2Type, divHeight, divWeight, favoriteButton, caughtButton)
   divContainer.append(divFrame)
   document.querySelector('#pokemon-container').append(divContainer)
-
+  
+  
   //ORDER POKEMON BY ID
-  empty.map.call(pokemonContainer.children, Object ).sort(function (a,b) {
-    return +a.id.match( /\d+/ ) - +b.id.match( /\d+/ );
+  empty.map.call(pokemonContainer.children, Object).sort(function (a,b) {
+    return +a.id.match(/\d+/) - +b.id.match(/\d+/);
   }).forEach(function (elem) {
     pokemonContainer.appendChild(elem);
   });
@@ -102,40 +124,30 @@ function renderSinglePokemon(pokemon){
   })
 
   //CLICKING ON A POKEMON FOR MORE DETAIL
-  divContainer.addEventListener('click', (e) => {
-    document.getElementById('pokemon-container').children.classList = 'hidden'
-    document.getElementById('pokemon-container').innerHTML='';
-    renderSinglePokemon(pokemon);
-    console.log(pokemon)
-    document.querySelector('.center-text').textContent = '#' + pokemon.id + ' ' + (capitalizeFirstLetter(pokemon.name))
-    
-    let divHeight = document.createElement('div')
-    let divWeight = document.createElement('div')
-    let divFullImage = document.createElement('div')
-    let imgBack = document.createElement('img')
-    let h2Height = document.createElement('h2')
-    let h2Weight = document.createElement('h2')
-
-    divFullImage.className = 'full-pokemon-image'
-    
-    imgBack.src = pokemon.sprites.back_default
-    h2Height.textContent = 'Height: ' + pokemon.height
-    h2Weight.textContent = 'Weight: ' + pokemon.weight    
-
-    document.querySelector('.pokemon-image').remove()
-    document.querySelector('h2').remove()
-    document.querySelector('.caught-button').remove()
-    document.querySelector('.favorite-button').remove()
-    divFullImage.append(img, imgBack)
-    divHeight.append(h2Height)
-    divWeight.append(h2Weight)
-    document.querySelector('.pokemon-frame').append(divFullImage, h2Type, divHeight, divWeight, favoriteButton, caughtButton)
-    
-    //BRINGING BACK THE THE FULL RENDERING
-    document.querySelector('.pokemon-card').addEventListener('click', ()=>{
-      document.getElementById('pokemon-container').innerHTML=''
-      fetchAllPokemon()
-    })
+  divContainer.addEventListener('click', () => {
+    if (divContainer.id == pokemon.id) {
+      //console.log(document.getElementById(`${pokemon.id}full-pokemon-image`))
+      document.querySelectorAll('.pokemon-card').forEach((e) => {
+        e.classList = 'hidden-card'
+      })
+      document.getElementById(`${pokemon.id}`).classList = 'pokemon-card'
+      document.getElementById(`${pokemon.id}height`).classList = ' '
+      document.getElementById(`${pokemon.id}weight`).classList = ' '
+      document.getElementById(`${pokemon.id}full-pokemon-image`).classList = 'full-pokemon-image'
+      document.getElementById(`${pokemon.id}full-pokemon-image`).append(img, imgBack)
+      document.getElementById(`${pokemon.id}image`).classList = 'hidden'
+      document.getElementById('pokedex-logo').addEventListener('click', (e) => {
+        document.getElementById('pokemon-container').children.classList = 'pokemon-card'
+        document.getElementById(`${pokemon.id}height`).classList = 'hidden'
+        document.getElementById(`${pokemon.id}weight`).classList = 'hidden'
+        document.getElementById(`${pokemon.id}full-pokemon-image`).classList = 'hidden'
+        document.getElementById(`${pokemon.id}image`).classList = 'pokemon-image'
+        document.getElementById(`${pokemon.id}image`).append(img)
+        document.querySelectorAll('.hidden-card').forEach((elem) => {
+          elem.classList = 'pokemon-card'
+        })
+      })
+    } 
   })
 }
 
@@ -149,3 +161,37 @@ function fetchAllPokemon(){
     })
   }
 }
+
+//OLD MORE DETAIL FUNCTIONALITY
+    // document.getElementById('pokemon-container').children.classList = 'hidden'
+    // document.getElementById('pokemon-container').innerHTML='';
+    // renderSinglePokemon(pokemon);
+    // document.querySelector('.center-text').textContent = '#' + pokemon.id + ' ' + (capitalizeFirstLetter(pokemon.name))
+    
+    // let divHeight = document.createElement('div')
+    // let divWeight = document.createElement('div')
+    // let divFullImage = document.createElement('div')
+    // let imgBack = document.createElement('img')
+    // let h2Height = document.createElement('h2')
+    // let h2Weight = document.createElement('h2')
+
+    // divFullImage.classList = 'full-pokemon-image'
+    
+    // imgBack.src = pokemon.sprites.back_default
+    // h2Height.textContent = 'Height: ' + pokemon.height
+    // h2Weight.textContent = 'Weight: ' + pokemon.weight    
+
+    // document.querySelector('.pokemon-image').remove()
+    // document.querySelector('h2').remove()
+    // document.querySelector('.caught-button').remove()
+    // document.querySelector('.favorite-button').remove()
+    // divFullImage.append(img, imgBack)
+    // divHeight.append(h2Height)
+    // divWeight.append(h2Weight)
+    // document.querySelector('.pokemon-frame').append(divFullImage, h2Type, divHeight, divWeight, favoriteButton, caughtButton)
+    
+    // //BRINGING BACK THE THE FULL RENDERING
+    // document.querySelector('.pokemon-card').addEventListener('click', ()=>{
+    //   document.getElementById('pokemon-container').innerHTML=''
+    //   fetchAllPokemon()
+    // })
