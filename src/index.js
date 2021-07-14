@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetchAllPokemon()
-  document.querySelector('#pokedex-logo').addEventListener('click', (e) => {
-    document.getElementById('pokemon-container').innerHTML='';
-    fetchAllPokemon()    
-  })
   document.querySelector('#notes-form').addEventListener('submit', (e) => {
     e.preventDefault()
     let addNote = document.querySelector("#note-input")
@@ -102,14 +98,13 @@ function renderSinglePokemon(pokemon){
 
   //FAVORITE BUTTON
   favoriteButton.addEventListener('click', (e) => { 
-    console.log(e.target)
-      if (e.target.id === 'favorite-empty'){
-        e.target.src = 'images/fillStarWhite.png'
-        e.target.id = 'favorite-fill'
-      } else {
-        e.target.src = 'images/emptyStarWhite.png'
-        e.target.id = 'favorite-empty' 
-      }
+    if (e.target.id === 'favorite-empty'){
+      e.target.src = 'images/fillStarWhite.png'
+      e.target.id = 'favorite-fill'
+    } else {
+      e.target.src = 'images/emptyStarWhite.png'
+      e.target.id = 'favorite-empty' 
+    }
     e.stopPropagation()
   })
 
@@ -131,15 +126,13 @@ function renderSinglePokemon(pokemon){
 
   //REMOVE BUTTON
   removeButton.addEventListener('click', (e) => {
-    console.log(e.target)
-    e.target.parentElement.parentElement.remove()
+    e.target.parentElement.parentElement.classList = 'hidden-card'
     e.stopPropagation()
   })
 
   //CLICKING ON A POKEMON FOR MORE DETAIL
   divContainer.addEventListener('click', () => {
     if (divContainer.id == pokemon.id) {
-      //console.log(document.getElementById(`${pokemon.id}full-pokemon-image`))
       document.querySelectorAll('.pokemon-card').forEach((e) => {
         e.classList = 'hidden-card'
       })
