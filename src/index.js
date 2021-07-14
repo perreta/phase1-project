@@ -39,8 +39,8 @@ function renderSinglePokemon(pokemon){
   caughtButton.type = 'image'
   favoriteButton.type = 'image'
   
-  caughtButton.src = 'images/emptyPokeball.png'
-  favoriteButton.src = 'images/emptyStar.png'
+  caughtButton.src = 'images/emptyPokeballWhite.png'
+  favoriteButton.src = 'images/emptyStarWhite.png'
   favoriteButton.id = 'favorite-empty'
 
   //ADDING TYPES
@@ -62,7 +62,7 @@ function renderSinglePokemon(pokemon){
 
   //CAUGHT BUTTON
   caughtButton.addEventListener('click', (e) => { 
-    caughtButton.src = 'images/fillPokeball.png'
+    caughtButton.src = 'images/fillPokeballWhite.png'
     e.stopPropagation()
   })
 
@@ -70,10 +70,10 @@ function renderSinglePokemon(pokemon){
   favoriteButton.addEventListener('click', (e) => { 
     console.log(e.target)
       if (e.target.id === 'favorite-empty'){
-        e.target.src = 'images/fillStar.png'
+        e.target.src = 'images/fillStarWhite.png'
         e.target.id = 'favorite-fill'
       } else {
-        e.target.src = 'images/emptyStar.png'
+        e.target.src = 'images/emptyStarWhite.png'
         e.target.id = 'favorite-empty' 
       }
     e.stopPropagation()
