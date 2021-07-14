@@ -16,8 +16,9 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 };
 
-// RENDERING ALL POKEMON -----------------------------------------------------------
+// RENDERING ALL POKEMON/ELEMENTS -----------------------------------------------------------
 function renderSinglePokemon(pokemon){
+  //CREATING ELEMENTS
   let divContainer = document.createElement('div')
   let divFrame = document.createElement('div')
   let divImage = document.createElement('div')
@@ -28,14 +29,15 @@ function renderSinglePokemon(pokemon){
   let caughtButton = document.createElement('input')
   let favoriteButton = document.createElement('input')
   let pokemonContainer = document.getElementById('pokemon-container')
-  let empty = []
   let divHeight = document.createElement('div')
   let divWeight = document.createElement('div')
   let divFullImage = document.createElement('div')
   let imgBack = document.createElement('img')
   let h2Height = document.createElement('h2')
   let h2Weight = document.createElement('h2')
-
+  let empty = []
+  
+  //ADDING CLASSES & IDS
   divContainer.classList = 'pokemon-card'
   divContainer.id = `${pokemon.id}`
   divFrame.classList = 'pokemon-frame'
@@ -45,6 +47,8 @@ function renderSinglePokemon(pokemon){
   h2Type.classList = 'type-class'
   removeButton.classList = 'remove-button'
   caughtButton.classList = 'caught-button'
+  caughtButton.type = 'image'
+  favoriteButton.type = 'image'
   favoriteButton.classList = 'favorite-button'
   divFullImage.id = `${pokemon.id}full-pokemon-image`
   divFullImage.classList = 'hidden'
@@ -53,15 +57,13 @@ function renderSinglePokemon(pokemon){
   divHeight.id = `${pokemon.id}height`
   divWeight.id = `${pokemon.id}weight`
 
+  //TEXTCONTENT & SOURCES
   h1.textContent = '#' + pokemon.id + ' ' + capitalizeFirstLetter(pokemon.name)
-  img.src = pokemon.sprites.front_default
   removeButton.textContent = 'X'
-  caughtButton.type = 'image'
-  favoriteButton.type = 'image'
-  imgBack.src = pokemon.sprites.back_default
   h2Height.textContent = 'Height: ' + pokemon.height
   h2Weight.textContent = 'Weight: ' + pokemon.weight 
-  
+  img.src = pokemon.sprites.front_default
+  imgBack.src = pokemon.sprites.back_default
   caughtButton.src = 'images/emptyPokeballWhite.png'
   favoriteButton.src = 'images/emptyStarWhite.png'
   favoriteButton.id = 'favorite-empty'
@@ -115,7 +117,6 @@ function renderSinglePokemon(pokemon){
   divFrame.append(removeButton, h1, divImage, divFullImage, h2Type, divHeight, divWeight, favoriteButton, caughtButton)
   divContainer.append(divFrame)
   document.querySelector('#pokemon-container').append(divContainer)
-  
   
   //ORDER POKEMON BY ID
   empty.map.call(pokemonContainer.children, Object).sort(function (a,b) {
