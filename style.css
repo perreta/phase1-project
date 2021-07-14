@@ -33,10 +33,10 @@ body {
     float: left;
     width: 300px;
     height: 300px;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     cursor: pointer
   }
   
@@ -45,7 +45,7 @@ body {
     margin: 10px;
     background: rgb(100, 100, 100);
     border: 12px solid silver; 
-    color: rgb(0, 255, 0);
+    color: chartreuse;
     /* -webkit-text-stroke: 1px black; */
     border-radius: 12px;
   }
@@ -85,4 +85,10 @@ body {
 
   .hidden{
     display: none;
+  }
+
+  #label {
+    font-weight: 900;
+    font-style: oblique;
+    color: chartreuse;
   }
