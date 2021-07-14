@@ -4,6 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('pokemon-container').innerHTML='';
     fetchAllPokemon()    
   })
+  document.querySelector('#notes-form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    let addNote = document.querySelector("#note-input")
+    let liNote = document.createElement("li")
+    liNote.textContent = addNote.value
+    let ulNoteAdd = document.querySelector("ul")
+    ulNoteAdd.appendChild(liNote)
+    addNote.value = ""
+  })
 })
 
   // CAPITALIZE FIRST LETTER

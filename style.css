@@ -91,4 +91,11 @@ body {
     font-weight: 900;
     font-style: oblique;
     color: chartreuse;
+    text-decoration: none;
+  }
+  
+  #notes-list {
+    font-weight: 700;
+    font-style: normal;
+    color: chartreuse
   }
