@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   fetchAllPokemon()
   document.querySelector('#pokedex-logo').addEventListener('click', (e) => {
-    fetchAllPokemon()
-    document.querySelector('#pokedex-logo').children.classList = 'pokemon-card'
+    document.getElementById('pokemon-container').innerHTML='';
+    fetchAllPokemon()    
   })
 })
 
@@ -60,9 +60,6 @@ function capitalizeFirstLetter(string) {
         h2Type.parentElement.parentElement.classList = 'hidden'}
     })
 
-    //CLICKABLE POKEDEX IMAGE
-    
-
     //CAUGHT BUTTON
     caughtButton.addEventListener('click', (e) => { 
       caughtButton.src = 'images/fillPokeball.png'
@@ -96,7 +93,9 @@ function capitalizeFirstLetter(string) {
     })
 
     //CLICKING ON A POKEMON FOR MORE DETAIL
-    divFrame.addEventListener('click',(e) => {
+    divContainer.addEventListener('click', (e) => {
+      
+      document.getElementById('pokemon-container').children.classList = 'hidden'
       document.getElementById('pokemon-container').innerHTML='';
       renderSinglePokemon(pokemon);
       console.log(pokemon)
@@ -140,18 +139,3 @@ function fetchAllPokemon(){
     })
   }
 }
-
-
-
-
-
-// function filterPokemon(pokemon){
-//   document.getElementById('type-dropdown').addEventListener('change', (e) =>{
-//     console.log(e.target.value)
-//     if (e.target.value == h2Type.textContent){}
-//     else{
-//       h2Type.parentElement.parentElement.parentElement.remove()
-//     }
-    
-    // document.getElementById('pokemon-container').innerHTML=''
-    // let filteredPokemon = pokemon.type
