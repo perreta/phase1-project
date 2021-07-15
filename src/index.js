@@ -4,20 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     let addNote = document.querySelector("#note-input")
     let liNote = document.createElement("li")
-    liNote.textContent = addNote.value
+    let liRemove = document.createElement("button")
+    liNote.textContent = addNote.value + ' '
+    liRemove.textContent = "X"
+    liRemove.classList = "li-remove"
+    liRemove.addEventListener("click", (e) => {
+      liRemove.parentElement.remove()
+    })
     let ulNoteAdd = document.querySelector("ul")
+    liNote.append(liRemove)
     ulNoteAdd.appendChild(liNote)
     addNote.value = ""
   })
 })
 
-  // CAPITALIZE FIRST LETTER
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-};
-
 // RENDERING ALL POKEMON/ELEMENTS -----------------------------------------------------------
 function renderSinglePokemon(pokemon){
+  
   //CREATING ELEMENTS
   let divContainer = document.createElement('div')
   let divFrame = document.createElement('div')
@@ -128,6 +131,17 @@ function renderSinglePokemon(pokemon){
   //REMOVE BUTTON
   removeButton.addEventListener('click', (e) => {
     e.target.parentElement.parentElement.classList = 'hidden-card'
+    document.getElementById('pokedex-logo').addEventListener('click', (e) => {
+      document.getElementById('pokemon-container').children.classList = 'pokemon-card'
+      document.getElementById(`${pokemon.id}height`).classList = 'hidden'
+      document.getElementById(`${pokemon.id}weight`).classList = 'hidden'
+      document.getElementById(`${pokemon.id}full-pokemon-image`).classList = 'hidden'
+      document.getElementById(`${pokemon.id}image`).classList = 'pokemon-image'
+      document.getElementById(`${pokemon.id}image`).append(img)
+      document.querySelectorAll('.hidden-card').forEach((elem) => {
+        elem.classList = 'pokemon-card'
+      })
+    })
     e.stopPropagation()
   })
 
@@ -158,7 +172,13 @@ function renderSinglePokemon(pokemon){
   })
 }
 
-// GET All------------------------------------------------------
+// CAPITALIZE FIRST LETTER
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+};
+
+
+// GET All
 function fetchAllPokemon(){
   for (let i = 1; i <= 151; ++i){
     fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
@@ -168,6 +188,8 @@ function fetchAllPokemon(){
     })
   }
 }
+
+
 
 //OLD MORE DETAIL FUNCTIONALITY
     // document.getElementById('pokemon-container').children.classList = 'hidden'
